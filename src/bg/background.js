@@ -4,10 +4,11 @@ chrome.browserAction.onClicked.addListener(function(tab) {
 		var addonText = localStorage["on_state"];
 		var symbol = "?";
 		var icon = "../../icons/icon19.png";
+		var reg = new RegExp('['+symbol+']'+addonText, 'g');
 
 		if (currentURL.search(addonText) >= 0) {
 			symbol = updateSymbol(currentURL);
-			currentURL = currentURL.replace(symbol+addonText, '');
+			currentURL = currentURL.replace(reg, '');
 			chrome.browserAction.setIcon({path:"../../icons/icon19.png"});
 		} else {
 			symbol = updateSymbol(currentURL);
@@ -39,8 +40,6 @@ function updateSymbol (currentURL) {
 	var symbol = "?";
 	if (currentURL.search(/[?=]/g) >= 0) {
 		symbol = "&";
-	} else {
-		symbol = "?";
 	}
 	return symbol;
 }
