@@ -1,18 +1,36 @@
+var symbol = "?";
+var icon = "../../icons/icon19.png";
+
 chrome.browserAction.onClicked.addListener(function(tab) {
 	chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
 		var currentURL = tabs[0]['url'];
-		var addonText = localStorage["on_state"];
-		var symbol = "?";
-		var icon = "../../icons/icon19.png";
-		var reg = new RegExp('['+symbol+']'+addonText, 'g');
+		var onState = localStorage["on_state"];
+		var offState = localStorage["off_state"];
 
-		if (currentURL.search(addonText) >= 0) {
-			symbol = updateSymbol(currentURL);
-			currentURL = currentURL.replace(reg, '');
-			chrome.browserAction.setIcon({path:"../../icons/icon19.png"});
+		if (currentURL.search(onState) >= 0) {
+			currentURL = currentURL.substring(0, currentURL.length - onState.length - 1);
+			var onStatus = true;
+		} else if (currentURL.search(offState) >= 0 && offState != "") {
+			currentURL = currentURL.substring(0, currentURL.length - offState.length - 1);
+			var onStatus = false;
 		} else {
-			symbol = updateSymbol(currentURL);
-			currentURL += symbol+addonText;
+			var onStatus = false;
+		}
+
+		updateSymbol(currentURL);
+
+		if (onStatus) {
+			if (offState == "") {
+				currentURL = currentURL+offState;
+			} else {
+				currentURL = currentURL+symbol+offState;
+			}
+			icon = "../../icons/icon19.png";
+		} else if (!onStatus) {
+			currentURL = currentURL+symbol+onState;
+			icon = "../../icons/on.png";
+		}else {
+			currentURL = currentURL+symbol+onState;
 			icon = "../../icons/on.png";
 		};
 		chrome.browserAction.setIcon({path: icon});
@@ -23,8 +41,9 @@ chrome.browserAction.onClicked.addListener(function(tab) {
 chrome.tabs.onActivated.addListener(function(tab) {
 	chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
 		var currentURL = tabs[0]['url'];
-		var addonText = localStorage["on_state"];
-		if (currentURL.search(addonText) >= 0) {
+		var onState = localStorage["on_state"];
+		var offState = localStorage["off_state"];
+		if (currentURL.search(onState) >= 0) {
 			chrome.browserAction.setIcon({path: "../../icons/on.png"});
 		} else {
 			chrome.browserAction.setIcon({path: "../../icons/icon19.png"});
@@ -37,9 +56,7 @@ chrome.tabs.onRemoved.addListener(function(tab) {
 });
 
 function updateSymbol (currentURL) {
-	var symbol = "?";
 	if (currentURL.search(/[?=]/g) >= 0) {
 		symbol = "&";
 	}
-	return symbol;
 }

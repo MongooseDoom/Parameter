@@ -1,9 +1,9 @@
 // Saves options to localStorage.
 function save_options() {
-  var on = document.getElementById("on").value;
-  //var off = document.getElementById("off").value;
-  localStorage["on_state"] = on;
-  //localStorage["off_state"] = off;
+  var onState = document.getElementById("on").value;
+  var offState = document.getElementById("off").value;
+  localStorage["on_state"] = onState || "";
+  localStorage["off_state"] = offState || "";
 
   // Update status to let user know options were saved.
   var status = document.getElementById("status");
@@ -15,11 +15,11 @@ function save_options() {
 
 // Restores select box state to saved value from localStorage.
 function restore_options() {
-  var on = localStorage["on_state"];
-  //var off = localStorage["off_state"];
+  var onState = localStorage["on_state"];
+  var offState = localStorage["off_state"];
 
-  document.getElementById("on").value = on;
-  //document.getElementById("off").value = off;
+  document.getElementById("on").value = onState;
+  document.getElementById("off").value = offState;
 }
 
 document.addEventListener('DOMContentLoaded', restore_options);

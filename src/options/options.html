@@ -1,13 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+	<style>
+		body { font-family: sans-serif; }
+		.wrapper { width: 30%; margin: 5em auto; }
+		.header { text-align: center; }
+		.field { margin: 1em 0; }
+		button { margin: 0 auto; display: block; }
+		label { width: 10%; display: inline-block; text-align: right; }
+		input { width: 78%; }
+		p { text-align: center; }
+	</style>
 </head>
-	<label for="on">Text:</label>
-	<input type="text" name="on" id="on"/>
-	<!-- <label for="off">Off:</label>
-	<input type="text" name="off" id="off"/> -->
+<div class="wrapper">
+	<div class="header">
+		<img src="../../icons/icon128.png" alt="">
+		<img src="../../icons/on128.png" alt="">
+	</div>
+	<p>This extension will turn a parameter from a URL on and off.</p>
+	<div class="field">
+		<label for="on">On:</label>
+		<input type="text" name="on" id="on"/>
+	</div>
+	<div class="field">
+		<label for="off">Off:</label>
+		<input type="text" name="off" id="off"/>
+	</div>
 	<button id="save">Save</button>
 	<p id="status"></p>
+</div>
 	<script type="text/javascript" src="options.js"></script>
 </html>

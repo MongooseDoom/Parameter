@@ -1,8 +1,8 @@
 {
   "name": "Parameters",
-  "version": "1.0",
+  "version": "1.1",
   "manifest_version": 2,
-  "description": "This extention adds/removes a parameter from a URL.",
+  "description": "This extension will turn a parameter from a URL on and off.",
   "homepage_url": "http://extensionizr.com",
   "options_page": "src/options/options.html",
   "icons": {
