@@ -10,6 +10,8 @@
 		label { width: 10%; display: inline-block; text-align: right; }
 		input { width: 78%; }
 		p { text-align: center; }
+		.check input, .check label { width: auto; }
+		.check input { margin-left: 10%; }
 	</style>
 </head>
 <div class="wrapper">
@@ -25,6 +27,10 @@
 	<div class="field">
 		<label for="off">Off:</label>
 		<input type="text" name="off" id="off"/>
+	</div>
+	<div class="field check">
+		<input type="checkbox" name="newWindow" id="newWindow"/>
+		<label for="newWindow">Open in new window</label>
 	</div>
 	<button id="save">Save</button>
 	<p id="status"></p>

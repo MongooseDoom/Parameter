@@ -6,6 +6,7 @@ chrome.browserAction.onClicked.addListener(function(tab) {
 		var currentURL = tabs[0]['url'];
 		var onState = localStorage["on_state"];
 		var offState = localStorage["off_state"];
+		var newWindow = localStorage["new_window"];
 
 		if (currentURL.search(onState) >= 0) {
 			currentURL = currentURL.substring(0, currentURL.length - onState.length - 1);
@@ -34,7 +35,12 @@ chrome.browserAction.onClicked.addListener(function(tab) {
 			icon = "../../icons/on.png";
 		};
 		chrome.browserAction.setIcon({path: icon});
-		chrome.tabs.update(null,{url: currentURL});
+
+		if (newWindow) {
+			chrome.tabs.create({ url: currentURL });
+		} else {
+			chrome.tabs.update(null,{url: currentURL});
+		}
 	});
 });
 

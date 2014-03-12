@@ -1,6 +1,6 @@
 {
   "name": "Parameters",
-  "version": "1.1",
+  "version": "1.2",
   "manifest_version": 2,
   "description": "This extension will turn a parameter from a URL on and off.",
   "homepage_url": "http://extensionizr.com",
