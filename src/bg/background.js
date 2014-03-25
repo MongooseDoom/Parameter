@@ -4,6 +4,7 @@ var icon = "../../icons/icon19.png";
 chrome.browserAction.onClicked.addListener(function(tab) {
 	chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
 		var currentURL = tabs[0]['url'];
+		var currentIndex = tabs[0]['index'];
 		var onState = localStorage["on_state"];
 		var offState = localStorage["off_state"];
 		var newWindow = localStorage["new_window"];
@@ -37,7 +38,7 @@ chrome.browserAction.onClicked.addListener(function(tab) {
 		chrome.browserAction.setIcon({path: icon});
 
 		if (newWindow) {
-			chrome.tabs.create({ url: currentURL });
+			chrome.tabs.create({ url: currentURL, index: currentIndex+1 });
 		} else {
 			chrome.tabs.update(null,{url: currentURL});
 		}
